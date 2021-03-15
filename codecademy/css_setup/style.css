@@ -2,7 +2,7 @@ p {
     font-family: Arial;
   }
 
-  h1 {
+h1 {
     color: maroon;
   }
   
@@ -15,18 +15,22 @@ p {
   }
 
 
-  .publish-time {
+.publish-time {
     color: gray;
   }
 
-  .cursive {
+.cursive {
     font-family: cursive;
   }
   
-  .capitalize {
+.capitalize {
     text-transform: capitalize;
   }
 
-  h2.destination {
+h2.destination {
     font-family: cursive;
+  }
+
+.description h5 {
+    color: teal;
   }

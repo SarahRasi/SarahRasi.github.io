@@ -36,3 +36,6 @@ let lostDollar = 50;
 
 gainedDollar++; //increment operator, fügt 1 hinzu
 lostDollar--; //decrement operator, nimmt eins weg
+
+var favoriteAnimal = 'dog';
+console.log('My favorite animal: ' + favoriteAnimal); //string + variable

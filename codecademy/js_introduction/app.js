@@ -25,3 +25,9 @@ console.log('Hello' + 'World'); //addiert Wörter
 console.log('Hello' + ' ' + 'World'); //mit Leerzeichen
 
 console.log('Teaching the world how to code' .length); //Anzahl der Character
+
+// Use .toUpperCase() to log 'Codecademy' in all uppercase letters
+console.log('Codecademy' .toUpperCase());
+
+// Use a string method to log the following string without whitespace at the beginning and end of it.
+console.log('    Remove whitespace   ' .trim());

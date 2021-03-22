@@ -39,3 +39,7 @@ lostDollar--; //decrement operator, nimmt eins weg
 
 var favoriteAnimal = 'dog';
 console.log('My favorite animal: ' + favoriteAnimal); //string + variable
+
+var myName = 'Sarah';
+var myCity = 'Innsbruck';
+console.log(`My name is ${myName}. My favorite city is ${myCity}.`);

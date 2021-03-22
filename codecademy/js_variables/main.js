@@ -43,3 +43,8 @@ console.log('My favorite animal: ' + favoriteAnimal); //string + variable
 var myName = 'Sarah';
 var myCity = 'Innsbruck';
 console.log(`My name is ${myName}. My favorite city is ${myCity}.`);
+
+let newVariable = 'Playing around with typeof.';
+console.log(typeof newVariable); //output ist string
+newVariable = 1
+console.log(typeof newVariable); //output ist number 

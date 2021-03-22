@@ -31,3 +31,7 @@ console.log('Codecademy' .toUpperCase());
 
 // Use a string method to log the following string without whitespace at the beginning and end of it.
 console.log('    Remove whitespace   ' .trim());
+
+console.log(Math.floor(Math.random() *100)); // random(0-1) mal 100 also 0-100; floor rundet zur nächstniedrigen Zahl
+console.log(Math.ceil(43.8)); //returns the smallest integer greater than or equal to a decimal number
+console.log(Number.isInteger(2017)); //checks if a number is an integer

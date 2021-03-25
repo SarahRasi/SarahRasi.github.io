@@ -38,6 +38,6 @@ for(let entry of ROUTE) {
 }
 
 
-
+//<option value="SarahRasi">Napier</option>
 //console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt
 

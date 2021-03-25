@@ -56,6 +56,8 @@ nav.onchange = (evt) => {
     let username =options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
     console.log(username, link);
+
+    window.location.href = link; 
 };
 
 //<option value="SarahRasi">Napier</option>

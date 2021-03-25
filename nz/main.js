@@ -14,8 +14,8 @@ console.log(stop.lng)
 console.log(stop.wikipedia)
 
 const map = L.map("map", {
-    center: [stop.lat , stop.lng],
-    zoom: 13,
+    //center: [stop.lat , stop.lng],
+   // zoom: 13,
     layers: [
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")  //s server, x longitude, y latitude
     ] 
@@ -32,6 +32,7 @@ for(let entry of ROUTE) {
     `); //`` 
 
     if (entry.nr == 21) {
+        map.setView([entry.lat, entry.lng], 13);
         mrk.openPopup();
     }
 }

@@ -1,6 +1,6 @@
 
 let stop = {
-    nr: 22,
+    nr: 21,
     name: "Napier",
     lat: -39.4928444,
     lng: 176.9120178,

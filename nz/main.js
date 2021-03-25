@@ -14,7 +14,7 @@ console.log(stop.lng)
 console.log(stop.wikipedia)
 
 const map = L.map("map", {
-    center: [-39.4928444 , 176.9120178 ],
+    center: [stop.lat , stop.lng],
     zoom: 13,
     layers: [
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")  //s server, x longitude, y latitude

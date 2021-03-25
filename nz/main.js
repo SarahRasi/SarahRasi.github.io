@@ -4,7 +4,7 @@ let stop = {
     name: "Napier",
     lat: -39.4928444,
     lng: 176.9120178,
-    user: SarahRasi,
+    user: "SarahRasi",
     wikipedia: "https://de.wikipedia.org/wiki/Napier_(Neuseeland)"
 };
 console.log(stop);

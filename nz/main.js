@@ -1,5 +1,4 @@
 
-
 const map = L.map("map", {
     center: [-39.4928444 , 176.9120178 ],
     zoom: 13,
@@ -9,6 +8,7 @@ const map = L.map("map", {
 });
 
 let mrk = L.marker([ -39.4928444 , 176.9120178 ]).addTo(map);
+mrk.bindPopup("Napier").openPopup();
 
 console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt
 

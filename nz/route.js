@@ -1,5 +1,4 @@
-const ROUTE = [
-{
+const ROUTE = [{
     nr: 2,
     name: "Lake Tekapo",
     lat: -43.883333,
@@ -113,7 +112,7 @@ const ROUTE = [
     wikipedia: "https://de.wikipedia.org/wiki/Milford_Sound"
 }, {
     nr: 7,
-    name: "Dunedine",
+    name: "Dunedin",
     lat: -45.874167,
     lng: 170.503611,
     user: "annaklara123",
@@ -181,5 +180,4 @@ const ROUTE = [
     lng: 172.8381,
     user: "AnnaKeuschnigg",
     wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)"
-}
-]; 
+}];

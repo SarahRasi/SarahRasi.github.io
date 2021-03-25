@@ -50,6 +50,12 @@ for(let entry of ROUTE) {
     }
 }
 
+nav.onchange = (evt) => {
+    let selected = evt.target.selectedIndex;
+    let options = evt.target.options;
+    let username = options[selected].value;
+    let link = `https://`
+};
 
 //<option value="SarahRasi">Napier</option>
 //console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt

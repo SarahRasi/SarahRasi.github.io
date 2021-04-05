@@ -25,10 +25,17 @@ const map = L.map("map", {
 let nav = document.querySelector("#navigation");
 //console.log(nav);
 //console.log(ROUTE);
-ROUTE.sort((stop1, stop2) => {
-    return stop1.nr > stop2.nr
-});
+//ROUTE.sort((stop1, stop2) => {
+ //   return stop1.nr > stop2.nr
+//});
 
+ROUTE.sort((stop1, stop2) => {
+    if (stop1.nr > stop2.nr) {
+        return 1;
+    } else {
+        return -1;
+    }
+});
 
 
 for(let entry of ROUTE) {

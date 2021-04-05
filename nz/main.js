@@ -23,6 +23,7 @@ const map = L.map("map", {
 
 
 let nav = document.querySelector("#navigation");
+console.log('Navigation HTML Element: ', nav);
 //console.log(nav);
 //console.log(ROUTE);
 //ROUTE.sort((stop1, stop2) => {
@@ -59,15 +60,15 @@ for(let entry of ROUTE) {
 
 nav.options.selectedIndex = 21 - 1;
 nav.onchange = (evt) => {
+    console.log(evt.target.selectedIndex);
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
     let username =options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
-    console.log(username, link);
-
     window.location.href = link; 
+    console.log(username, link); 
 };
 
 //<option value="SarahRasi">Napier</option>
-//console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt
+console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt
 

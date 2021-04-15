@@ -86,6 +86,15 @@ fetch(awsUrl)
                 if (station.properties.WG > 30) {
                     windHighlightClass = "wind-30";
                 }
+                
+                if (station.properties.WG > 40) {
+                    windHighlightClass = "wind-40";
+                }
+            
+                if (station.properties.WG > 50) {
+                    windHighlightClass = "wind-50";
+                }
+
                 let windIcon = L.divIcon({
                     html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
                 })

@@ -44,6 +44,11 @@ fetch(awsUrl)
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
                 <li>Temperatur: ${station.properties.LT} C</li>
+                <li>Schneehöhe: ${station.properties.HS} cm</li>
+                <li>Luftfeuchtigkeit: ${station.properties.RH} %</li>
+                <li>Windgeschwindigkeit: ${station.properties.WG} km/h</li>
+                <li>Windrichtung: ${station.properties.WR} </li>
+                <li>Höhe der Wetterstation: ${station.geometry.coordinates[2]} m</li>
             </ul>
             `);
             marker.addTo(awsLayer);
@@ -51,3 +56,6 @@ fetch(awsUrl)
         //set map view to all stations
         map.fitBounds(awsLayer.getBounds());
     });
+
+    // Weitere Werte: Schneehöhe, Luftfeuschtigkeit, Höhe der Wetterstation
+    // 

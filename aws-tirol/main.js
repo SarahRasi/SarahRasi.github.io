@@ -61,33 +61,33 @@ fetch(awsUrl)
 
             marker.addTo(awsLayer);
             if (station.properties.WG) {
-                let windClass = '';
+                let windHighlightClass = '';
                 if (station.properties.WG > 2) {
                     windClass = "wind-2";
                 }
                 if (station.properties.WG > 4) {
-                    windClass = "wind-4";
+                    windHighlightClass = "wind-4";
                 }
                 if (station.properties.WG > 6) {
-                    windClass = "wind-6";
+                    windHighlightClass = "wind-6";
                 }
                 if (station.properties.WG > 8) {
-                    windClass = "wind-8";
+                    windHighlightClass = "wind-8";
                 }
                 if (station.properties.WG > 10) {
-                    windClass = "wind-10";
+                    windHighlightClass = "wind-10";
                 }
                 if (station.properties.WG > 12) {
-                    windClass = "wind-12";
+                    windHighlightClass = "wind-12";
                 }
                 if (station.properties.WG > 20) {
-                    windClass = "wind-20";
+                    windHighlightClass = "wind-20";
                 }
                 if (station.properties.WG > 30) {
-                    windClass = "wind-30";
+                    windHighlightClass = "wind-30";
                 }
                 let windIcon = L.divIcon({
-                    html: `<div class="wind-label ${highlightClass}">${station.properties.WG}</div>`
+                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
                 })
                 let windMarker = L.marker([
                     station.geometry.coordinates[1],

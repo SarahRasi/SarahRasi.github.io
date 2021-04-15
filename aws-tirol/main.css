@@ -31,3 +31,50 @@ h2 {
 .snow-200 {
     background-color: red;
 }
+
+.wind-label {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid rgb(151, 236, 165);
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
+.wind-2 {
+    background-color:  rgb(25, 143, 64);
+}
+
+.wind-4 {
+    background-color: rgb(43, 199, 95);
+}
+
+.wind-6 {
+    background-color: rgb(0, 255, 85);
+}
+
+.wind-8 {
+    background-color: rgb(134, 238, 74);
+}
+
+.wind-10 {
+    background-color: rgb(160, 240, 33);
+}
+
+.wind-12 {
+    background-color: rgb(187, 255, 0);
+}
+
+.wind-20 {
+    background-color: rgb(229, 255, 0);
+}
+
+.wind-30 {
+    background-color: rgb(255, 208, 0);
+}

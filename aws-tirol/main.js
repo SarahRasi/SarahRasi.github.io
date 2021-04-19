@@ -33,6 +33,9 @@ snowLayer.addTo(map);
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
 windLayer.addTo(map);
+let tempLayer = L.featureGroup();
+layerControl.addOverlay(tempLayer, "Lufttemperatur");
+tempLayer.addTo(map);
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -107,6 +110,28 @@ fetch(awsUrl)
                 windMarker.addTo(windLayer);
             }
 
+
+
+            marker.addTo(awsLayer);
+            if (station.properties.HS) {
+                let highlightClass = '';
+                if (station.properties.HS > 100) {
+                    highlightClass = 'snow-100';
+                }
+                if (station.properties.HS > 200) {
+                    highlightClass = 'snow-200';
+                }
+                let snowIcon = L.divIcon({
+                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
+                })
+                let snowMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: snowIcon
+                });
+                snowMarker.addTo(snowLayer);
+            }
 
 
             marker.addTo(awsLayer);

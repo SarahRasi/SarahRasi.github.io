@@ -135,24 +135,27 @@ fetch(awsUrl)
 
 
             marker.addTo(awsLayer);
-            if (station.properties.HS) {
-                let highlightClass = '';
-                if (station.properties.HS > 100) {
-                    highlightClass = 'snow-100';
+            if (station.properties.LT) {
+                let temphighlightClass = '';
+                if (station.properties.LT > 0) {
+                    temphighlightClass = 'temp-positive';
                 }
-                if (station.properties.HS > 200) {
-                    highlightClass = 'snow-200';
+                if (station.properties.LT < 0) {
+                    temphighlightClass = 'temp-negative';
                 }
-                let snowIcon = L.divIcon({
-                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
+                if (station.properties.LT == 0) {
+                    temphighlightClass = 'temp-zero';
+                }
+                let tempIcon = L.divIcon({
+                    html: `<div class="temp-label ${temphighlightClass}">${station.properties.LT}</div>`
                 })
-                let snowMarker = L.marker([
+                let tempMarker = L.marker([
                     station.geometry.coordinates[1],
                     station.geometry.coordinates[0]
                 ], {
-                    icon: snowIcon
+                    icon: tempIcon
                 });
-                snowMarker.addTo(snowLayer);
+                tempMarker.addTo(tempLayer);
             }
         }
         // set map view to all stations

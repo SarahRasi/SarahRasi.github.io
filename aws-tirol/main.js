@@ -1,7 +1,9 @@
 
 let basemapGray = L.tileLayer.provider('BasemapAT.grau');
+//https://leafletjs.com/reference-1.7.1.html#tilelayer
 
 let map = L.map("map", {
+    //https://leafletjs.com/reference-1.7.1.html#map-factory
     center: [47, 11],
     zoom: 9,
     layers: [
@@ -10,6 +12,7 @@ let map = L.map("map", {
 });
 
 let layerControl = L.control.layers({
+    //https://leafletjs.com/reference-1.7.1.html#control-layers
     "BasemapAT.grau": basemapGray,
     "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
     "BasemapAT.terrain": L.tileLayer.provider('BasemapAT.terrain'),
@@ -19,12 +22,14 @@ let layerControl = L.control.layers({
     "BasemapAT.overlay+orthofoto": L.layerGroup([
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
+        //https://leafletjs.com/reference-1.7.1.html#tilelayer
     ])
 }).addTo(map);
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 let awsLayer = L.featureGroup();
+//https://leafletjs.com/reference-1.7.1.html#featuregroup
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
 awsLayer.addTo(map);
 let snowLayer = L.featureGroup();
@@ -44,6 +49,7 @@ fetch(awsUrl)
         for (station of json.features) {
             // console.log('Station: ', station);
             let marker = L.marker([
+                //https://leafletjs.com/reference-1.7.1.html#marker
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
@@ -99,9 +105,11 @@ fetch(awsUrl)
                 }
 
                 let windIcon = L.divIcon({
+                    //https://leafletjs.com/reference-1.7.1.html#divicon
                     html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
                 })
                 let windMarker = L.marker([
+                    //https://leafletjs.com/reference-1.7.1.html#marker
                     station.geometry.coordinates[1],
                     station.geometry.coordinates[0]
                 ], {

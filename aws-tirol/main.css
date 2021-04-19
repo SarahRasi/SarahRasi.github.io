@@ -86,3 +86,31 @@ h2 {
 .wind-50 {
     background-color: rgb(255, 72, 0);
 }
+
+
+.temp-label {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid rgb(151, 223, 236);
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
+.temp-positive {
+    background-color:  rgb(7, 218, 77);
+}
+
+.temp-negative {
+    background-color: rgb(43, 66, 199);
+}
+
+.temp-zero {
+    background-color: rgb(243, 250, 245);
+}

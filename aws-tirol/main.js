@@ -12,13 +12,12 @@ let map = L.map("map", {
 });
 
 let overlays = {
-    ststions: L.featureGroup(),
+    stations: L.featureGroup(),
     temperature: L.featureGroup(),
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
     winddirection: L.featureGroup(),
 };
-console.log(overlays.stations)
 
 let layerControl = L.control.layers({
     //https://leafletjs.com/reference-1.7.1.html#control-layers
@@ -33,23 +32,16 @@ let layerControl = L.control.layers({
         L.tileLayer.provider('BasemapAT.overlay')
         //https://leafletjs.com/reference-1.7.1.html#tilelayer
     ])
+}, {
+    "Wetterstationen Tirol": overlays.stations,
+    "Temperatur (°C)": overlays.temperature,
+    "Schneehöhe (cm)": overlays.snowheight,
+    "Windgeschwindigkeit (km/h)": overlays.windspeed,
+    "Windrichtung": overlays.winddirection
 }).addTo(map);
+overlays.temperature.addTo(map);
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
-
-let awsLayer = L.featureGroup();
-//https://leafletjs.com/reference-1.7.1.html#featuregroup
-layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
-awsLayer.addTo(map);
-let snowLayer = L.featureGroup();
-layerControl.addOverlay(snowLayer, "Schneehöhe");
-snowLayer.addTo(map);
-let windLayer = L.featureGroup();
-layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
-windLayer.addTo(map);
-let tempLayer = L.featureGroup();
-layerControl.addOverlay(tempLayer, "Lufttemperatur");
-tempLayer.addTo(map);
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -77,7 +69,7 @@ fetch(awsUrl)
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
 
-            marker.addTo(awsLayer);
+            marker.addTo(overlays.windspeed);
             if (station.properties.WG) {
                 let windHighlightClass = '';
                 if (station.properties.WG > 2) {
@@ -129,7 +121,7 @@ fetch(awsUrl)
 
 
 
-            marker.addTo(awsLayer);
+            marker.addTo(overlays.snowheight);
             if (station.properties.HS) {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
@@ -151,7 +143,7 @@ fetch(awsUrl)
             }
 
 
-            marker.addTo(awsLayer);
+            marker.addTo(overlays.temperature);
             if (station.properties.LT) {
                 let temphighlightClass = '';
                 if (station.properties.LT > 0) {
@@ -176,7 +168,7 @@ fetch(awsUrl)
             }
         }
         // set map view to all stations
-        map.fitBounds(awsLayer.getBounds());
+        map.fitBounds(overlays.stations.getBounds());
     });
 
     

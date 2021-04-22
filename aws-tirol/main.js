@@ -88,109 +88,29 @@ fetch(awsUrl)
             `);
 
             marker.addTo(overlays.stations);
-            if (typeof station.properties.HS == "number") {
-                let highlightClass = '';
-                if (station.properties.HS > 100) {
-                    highlightClass = 'snow-100';
-                }
-                if (station.properties.HS > 200) {
-                    highlightClass = 'snow-200';
-                }
-                let snowIcon = L.divIcon({
-                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
-                })
-                let snowMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: snowIcon
+            if (typeof station.properties.HS == "number") 
+                let marker = newLabel(station.geometry.coordinates, {
+                value: station.properties.HS
                 });
-                snowMarker.addTo(overlays.snowheight);
-            }
+                marker.addTo(overlays.snowheight);
+
 
             marker.addTo(overlays.windspeed);
-            if (typeof station.properties.WG == "number") {
-                let windHighlightClass = '';
-                if (station.properties.WG > 2) {
-                    windClass = "wind-2";
-                }
-                if (station.properties.WG > 4) {
-                    windHighlightClass = "wind-4";
-                }
-                if (station.properties.WG > 6) {
-                    windHighlightClass = "wind-6";
-                }
-                if (station.properties.WG > 8) {
-                    windHighlightClass = "wind-8";
-                }
-                if (station.properties.WG > 10) {
-                    windHighlightClass = "wind-10";
-                }
-                if (station.properties.WG > 12) {
-                    windHighlightClass = "wind-12";
-                }
-                if (station.properties.WG > 20) {
-                    windHighlightClass = "wind-20";
-                }
-                if (station.properties.WG > 30) {
-                    windHighlightClass = "wind-30";
-                }
-                
-                if (station.properties.WG > 40) {
-                    windHighlightClass = "wind-40";
-                }
-            
-                if (station.properties.WG > 50) {
-                    windHighlightClass = "wind-50";
-                }
-
-                let windIcon = L.divIcon({
-                    //https://leafletjs.com/reference-1.7.1.html#divicon
-                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
-                })
-                let windMarker = L.marker([
-                    //https://leafletjs.com/reference-1.7.1.html#marker
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: windIcon
+            if (typeof station.properties.WG == "number") 
+                let marker = newLabel(station.geometry.coordinates, {
+                value: station.properties.WG
                 });
-                windMarker.addTo(overlays.windspeed);
-            }
-
-
-
-            marker.addTo(overlays.snowheight);
-            if (typeof station.properties.HS == "number") {
-                let highlightClass = '';
-                if (station.properties.HS > 100) {
-                    highlightClass = 'snow-100';
-                }
-                if (station.properties.HS > 200) {
-                    highlightClass = 'snow-200';
-                }
-                let snowIcon = L.divIcon({
-                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
-                })
-                let snowMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: snowIcon
-                });
-                snowMarker.addTo(overlays.snowheight);
-            }
-
+                marker.addTo(overlays.windspeed);
+        
 
             marker.addTo(overlays.temperature);
-            if (typeof station.properties.LT == "number") {
+            if (typeof station.properties.LT == "number")
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT
                 });
                 marker.addTo(overlays.temperature);
-            }
-            
-        }
+            } 
+        
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
     });

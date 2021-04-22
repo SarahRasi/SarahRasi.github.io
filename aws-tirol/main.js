@@ -11,6 +11,15 @@ let map = L.map("map", {
     ]
 });
 
+let overlays = {
+    ststions: L.featureGroup(),
+    temperature: L.featureGroup(),
+    snowheight: L.featureGroup(),
+    windspeed: L.featureGroup(),
+    winddirection: L.featureGroup(),
+};
+console.log(overlays.stations)
+
 let layerControl = L.control.layers({
     //https://leafletjs.com/reference-1.7.1.html#control-layers
     "BasemapAT.grau": basemapGray,

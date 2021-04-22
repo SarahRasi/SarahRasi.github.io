@@ -47,6 +47,14 @@ L.control.scale({
     imperial: false
 }).addTo(map);
 
+let newLabel = (coords, options) => {
+    //Label erstellen
+
+    //den Label zurückgeben
+    let marker = L.marker([coords[1], coords[0]]);
+    return marker;
+};
+
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 fetch(awsUrl)
@@ -172,7 +180,10 @@ fetch(awsUrl)
 
             marker.addTo(overlays.temperature);
             if (typeof station.properties.LT == "number") {
-                console.log(station.properties.LT)
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.LT
+                });
+                marker.addTo(overlays.temperature);
             }
             
             
@@ -203,4 +214,10 @@ fetch(awsUrl)
         map.fitBounds(overlays.stations.getBounds());
     });
 
-    
+    let newLabel = (coords, options) => {
+        //Label erstellen
+
+        //den Label zurückgeben
+    };
+
+    //newLabel(...,...).addTo(overlays.temperature)

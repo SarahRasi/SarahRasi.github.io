@@ -49,6 +49,12 @@ L.control.scale({
 
 
 let getColor = (value, colorRamp) => {
+    for (let rule of colorRamp) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.col;
+        }
+    }
+    return "black";
 
 };
 

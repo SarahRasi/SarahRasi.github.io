@@ -214,10 +214,4 @@ fetch(awsUrl)
         map.fitBounds(overlays.stations.getBounds());
     });
 
-    let newLabel = (coords, options) => {
-        //Label erstellen
-
-        //den Label zurückgeben
-    };
-
     //newLabel(...,...).addTo(overlays.temperature)

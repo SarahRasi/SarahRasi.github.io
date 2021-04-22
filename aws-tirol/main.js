@@ -76,7 +76,7 @@ fetch(awsUrl)
             `);
 
             marker.addTo(overlays.stations);
-            if (station.properties.HS) {
+            if (typeof station.properties.HS == "number") {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
                     highlightClass = 'snow-100';
@@ -97,7 +97,7 @@ fetch(awsUrl)
             }
 
             marker.addTo(overlays.windspeed);
-            if (station.properties.WG) {
+            if (typeof station.properties.WG == "number") {
                 let windHighlightClass = '';
                 if (station.properties.WG > 2) {
                     windClass = "wind-2";
@@ -149,7 +149,7 @@ fetch(awsUrl)
 
 
             marker.addTo(overlays.snowheight);
-            if (station.properties.HS) {
+            if (typeof station.properties.HS == "number") {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
                     highlightClass = 'snow-100';
@@ -171,6 +171,11 @@ fetch(awsUrl)
 
 
             marker.addTo(overlays.temperature);
+            if (typeof station.properties.LT == "number") {
+                console.log(station.properties.LT)
+            }
+            
+            
             if (station.properties.LT) {
                 let temphighlightClass = '';
                 if (station.properties.LT > 0) {

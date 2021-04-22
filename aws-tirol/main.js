@@ -38,6 +38,8 @@ let layerControl = L.control.layers({
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection
+},{
+    collapsed: false
 }).addTo(map);
 overlays.temperature.addTo(map);
 
@@ -137,7 +139,7 @@ fetch(awsUrl)
                 ], {
                     icon: windIcon
                 });
-                windMarker.addTo(windLayer);
+                windMarker.addTo(overlays.windspeed);
             }
 
 
@@ -160,7 +162,7 @@ fetch(awsUrl)
                 ], {
                     icon: snowIcon
                 });
-                snowMarker.addTo(snowLayer);
+                snowMarker.addTo(overlays.snowheight);
             }
 
 
@@ -185,7 +187,7 @@ fetch(awsUrl)
                 ], {
                     icon: tempIcon
                 });
-                tempMarker.addTo(tempLayer);
+                tempMarker.addTo(overlays.temperature);
             }
         }
         // set map view to all stations

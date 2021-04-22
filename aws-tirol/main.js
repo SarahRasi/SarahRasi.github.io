@@ -59,9 +59,9 @@ let getColor = (value, colorRamp) => {
 };
 
 let newLabel = (coords, options) => {
-    let color = getColor(options.value, options.colors)
+    let color = getColor(options.value, options.colors);
     let label = L.divIcon({
-        html: `<div>${options.value}</div>`,
+        html: `<div style="background-color:${color}">${options.value}</div>`,
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]], {
@@ -108,7 +108,6 @@ fetch(awsUrl)
                 marker.addTo(overlays.snowheight);
 
             }
-            marker.addTo(overlays.windspeed);
             if (typeof station.properties.WG == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.WG,
@@ -117,7 +116,6 @@ fetch(awsUrl)
                 marker.addTo(overlays.windspeed);
         
             }
-            marker.addTo(overlays.temperature);
             if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT,

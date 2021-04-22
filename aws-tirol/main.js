@@ -88,29 +88,29 @@ fetch(awsUrl)
             `);
 
             marker.addTo(overlays.stations);
-            if (typeof station.properties.HS == "number") 
+            if (typeof station.properties.HS == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                value: station.properties.HS
+                    value: station.properties.HS
                 });
                 marker.addTo(overlays.snowheight);
 
-
+            }
             marker.addTo(overlays.windspeed);
-            if (typeof station.properties.WG == "number") 
+            if (typeof station.properties.WG == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                value: station.properties.WG
+                    value: station.properties.WG
                 });
                 marker.addTo(overlays.windspeed);
         
-
+            }
             marker.addTo(overlays.temperature);
-            if (typeof station.properties.LT == "number")
+            if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT
                 });
                 marker.addTo(overlays.temperature);
             } 
-        
+        }
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
     });

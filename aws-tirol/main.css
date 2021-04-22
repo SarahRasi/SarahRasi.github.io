@@ -235,7 +235,7 @@ const COLORS = {
 };
 
 
-.text-label div{
+.text-label div {
     font-size: 1.25em;
     font-weight: bold;
     display: inline;

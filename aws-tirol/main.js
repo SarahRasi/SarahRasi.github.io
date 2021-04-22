@@ -48,9 +48,6 @@ L.control.scale({
 }).addTo(map);
 
 let newLabel = (coords, options) => {
-    //Label erstellen
-
-    //den Label zurückgeben
     let label = L.divIcon({
         html: `<div>${options.value}</div>`,
         className: "text-label"

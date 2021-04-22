@@ -233,3 +233,18 @@ const COLORS = {
         col: "#cd0feb"
     }]
 };
+
+
+.text-label div{
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid rgb(151, 236, 165);
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white,
+}

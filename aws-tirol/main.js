@@ -51,9 +51,16 @@ let newLabel = (coords, options) => {
     //Label erstellen
 
     //den Label zurückgeben
-    let marker = L.marker([coords[1], coords[0]]);
+    let label = L.divIcon({
+        html: `<div>${options.value}</div>`,
+        className: "text-label"
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label
+    });
     return marker;
 };
+//.text-label
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
@@ -186,29 +193,6 @@ fetch(awsUrl)
                 marker.addTo(overlays.temperature);
             }
             
-            
-            if (station.properties.LT) {
-                let temphighlightClass = '';
-                if (station.properties.LT > 0) {
-                    temphighlightClass = 'temp-positive';
-                }
-                if (station.properties.LT < 0) {
-                    temphighlightClass = 'temp-negative';
-                }
-                if (station.properties.LT == 0) {
-                    temphighlightClass = 'temp-zero';
-                }
-                let tempIcon = L.divIcon({
-                    html: `<div class="temp-label ${temphighlightClass}">${station.properties.LT}</div>`
-                })
-                let tempMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: tempIcon
-                });
-                tempMarker.addTo(overlays.temperature);
-            }
         }
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());

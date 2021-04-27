@@ -39,7 +39,7 @@ let layerControl = L.control.layers({
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection,
-    "Relative Luftfeuchtigkeit": overlays.humidity
+    "Luftfeuchtigkeit": overlays.humidity
 },{
     collapsed: false  
 }).addTo(map);

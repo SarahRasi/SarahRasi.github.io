@@ -56,6 +56,15 @@ let getColor = (value, colorRamp) => {
             return rule.col;
         }
     }
+};
+return "black";
+
+let get = (value, directionRamp) => {
+    for (let rule of directionRamp) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.dir;
+        }
+    }
     return "black";
 
 };
@@ -136,6 +145,14 @@ fetch(awsUrl)
                     station: station.properties.name
                 });
                 marker.addTo(overlays.humidity);
+            }
+            if (typeof station.properties.WR == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.WR.toFixed(2),
+                    direction: DIRECTIONS,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.winddirection);
             }
         }
         // set map view to all stations

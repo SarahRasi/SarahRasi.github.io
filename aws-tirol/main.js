@@ -17,6 +17,7 @@ let overlays = {
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
     winddirection: L.featureGroup(),
+    humidity: L.featureGroup(),
 };
 
 let layerControl = L.control.layers({
@@ -37,7 +38,8 @@ let layerControl = L.control.layers({
     "Temperatur (°C)": overlays.temperature,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection
+    "Windrichtung": overlays.winddirection,
+    "Relative Luftfeuchtigkeit": overlays.humidity
 },{
     collapsed: false  
 }).addTo(map);
@@ -127,6 +129,14 @@ fetch(awsUrl)
                 });
                 marker.addTo(overlays.temperature);
             } 
+            if (typeof station.properties.RH == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.RH.toFixed(0),
+                    colors: COLORS.humidity,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.humidity);
+            }
         }
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());

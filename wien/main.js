@@ -72,9 +72,9 @@ let drawBusStop = (geojsonData) => {
 let drawBusLine = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            //layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
-            //<hr>
-            //Station: ${feature.properties.STAT_NAME}`)
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            Station: ${feature.properties.STAT_NAME}`)
         },
         attribution: '<a href="https://data.wien.gv.at">Stadt Wien<a/>, <a href="https://mapicons.mapsmarker.com">Maps Icon Collection<a/>'
     }).addTo(overlays.busLines);

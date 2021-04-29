@@ -71,6 +71,11 @@ let drawBusStop = (geojsonData) => {
 
 let drawBusLine = (geojsonData) => {
     L.geoJson(geojsonData, {
+        style: (feature) => {
+            return {
+                color: "red"
+            }
+        },
         onEachFeature: (feature, layer) => {
             layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
             <hr>

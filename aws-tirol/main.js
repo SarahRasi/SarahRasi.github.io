@@ -19,6 +19,7 @@ let overlays = {
     winddirection: L.featureGroup(),
     humidity: L.featureGroup(),
 };
+console.log(overlays.stations);
 
 let layerControl = L.control.layers({
     //https://leafletjs.com/reference-1.7.1.html#control-layers
@@ -39,7 +40,7 @@ let layerControl = L.control.layers({
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection,
-    "Luftfeuchtigkeit (%)": overlays.humidity
+    "Luftfeuchtigkeit (%)": overlays.humidity,
 },{
     collapsed: false  
 }).addTo(map);
@@ -53,16 +54,16 @@ L.control.scale({
 let getColor = (value, colorRamp) => {
     for (let rule of colorRamp) {
         if (value >= rule.min && value < rule.max) {
-            return rule.col;
+            return rule.col
         }
     }
+    return "black";
 };
-return "black";
 
-let get = (value, directionRamp) => {
-    for (let rule of directionRamp) {
-        if (value >= rule.min && value < rule.max) {
-            return rule.dir;
+let getDirection = (direction, minmax) => {
+    for (let rule of minmax) {
+        if ((direction >= rule.min) && (direction < rule.max)) {
+            return rule.dir
         }
     }
     return "black";
@@ -81,7 +82,22 @@ let newLabel = (coords, options) => {
     });
     return marker;
 };
-//.text-label
+
+
+let newDirection = (coords, options) => {
+    let direction = getDirection(options.value, options.directions);
+    let label = L.divIcon({
+        html: `<div>${direction}</div>`,
+        className: "text-label",
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label,
+        title: `${options.station} (${coords[2]}m)`
+    });
+    return marker;
+};
+
+
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
@@ -106,7 +122,7 @@ fetch(awsUrl)
                 <li>Schneehöhe: ${station.properties.HS || '?'} cm</li>
                 <li>Luftfeuchtigkeit: ${station.properties.RH || '?'} %</li>
                 <li>Windgeschwindigkeit: ${station.properties.WG || '?'} km/h</li>
-                <li>Windrichtung: ${station.properties.WR || '?'} </li>
+                <li>Windrichtung: ${getDirection(station.properties.WR,DIRECTIONS) || "?"} ° </li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
@@ -138,7 +154,7 @@ fetch(awsUrl)
                 });
                 marker.addTo(overlays.temperature);
             } 
-            if (typeof station.properties.RH == "number") {
+            if (typeof station.properties.RH == "number" && station.properties.RH > 0) {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.RH.toFixed(0),
                     colors: COLORS.humidity,
@@ -146,10 +162,10 @@ fetch(awsUrl)
                 });
                 marker.addTo(overlays.humidity);
             }
-            if (typeof station.properties.WR == "number") {
-                let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.WR.toFixed(2),
-                    direction: DIRECTIONS,
+            if (typeof station.properties.WR == "number" && station.properties.RH > 0) {
+                let marker = newDirection(station.geometry.coordinates, {
+                    value: station.properties.WR,
+                    directions: DIRECTIONS,
                     station: station.properties.name
                 });
                 marker.addTo(overlays.winddirection);

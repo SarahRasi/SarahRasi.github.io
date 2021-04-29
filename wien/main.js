@@ -112,6 +112,7 @@ let drawPedestrianAreas = (geojsonData) => {
 
 
 let drawSights = (geojsonData) => {
+    console.log('Sights: ',geojsonData);
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
             //layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>

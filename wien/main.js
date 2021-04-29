@@ -17,7 +17,8 @@ let baselayers = {
 let overlays = {
     busLines: L.featureGroup(),
     busStops: L.featureGroup(),
-    pedAreas: L.featureGroup()
+    pedAreas: L.featureGroup(),
+    sights: L.featureGroup()
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -40,13 +41,15 @@ let layerControl = L.control.layers({
 }, {
     "Liniennetz Vienna Sightseeing": overlays.busLines,
     "Haltestellen Vienna Sightseeing": overlays.busStops,
-    "Fußgängerzonen": overlays.pedAreas
+    "Fußgängerzonen": overlays.pedAreas,
+    "Sehenswürdikeiten": overlays.sights
 }).addTo(map);
 
 // alle Overlays nach dem Laden anzeigen
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
+overlays.sights.addTo(map);
 
 
 let drawBusStop = (geojsonData) => {
@@ -107,6 +110,27 @@ let drawPedestrianAreas = (geojsonData) => {
     }).addTo(overlays.pedAreas);
 }
 
+
+let drawSights = (geojsonData) => {
+    L.geoJson(geojsonData, {
+        onEachFeature: (feature, layer) => {
+            //layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            //<hr>
+            //Station: ${feature.properties.STAT_NAME}`)
+        },
+        pointToLayer: (geoJsonPoint, latlng) => {
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: 'icons/sehenswuerdigogd.png',
+                    iconSize: [38, 38]
+                })
+            })
+        },
+        attribution: '<a href="https://data.wien.gv.at">Stadt Wien<a/>'
+    }).addTo(overlays.sights);
+}
+
+
 for (let config of OGDWIEN) {
     console.log("Config: ", config.data);
     fetch(config.data)
@@ -122,5 +146,12 @@ for (let config of OGDWIEN) {
             else if(config.title == "Fußgängerzonen") {
                 drawPedestrianAreas(geojsonData);
             }
+            else if(config.title == "Sehenswürdigkeiten") {
+                drawSights(geojsonData);
+            }
         })
 }
+
+
+//aus data gv weiteren Dazuesatz dazu mit Sehenswürdigkeiten in Wien (bei data.gv.at in Suche Sehenswürdigkeiten Standorte Wien)
+//runterladen, Programm so erweitern, dass wir das dazu schalten können mit Icon und hinzu und weg schalten (Punkt Layer)

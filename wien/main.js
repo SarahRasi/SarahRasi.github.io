@@ -115,9 +115,9 @@ let drawSights = (geojsonData) => {
     console.log('Sights: ',geojsonData);
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            //layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
-            //<hr>
-            //Station: ${feature.properties.STAT_NAME}`)
+            layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
+            <hr>
+            Adresse: ${feature.properties.ADRESSE}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => {
             return L.marker(latlng, {

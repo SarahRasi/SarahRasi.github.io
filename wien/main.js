@@ -72,8 +72,12 @@ let drawBusStop = (geojsonData) => {
 let drawBusLine = (geojsonData) => {
     L.geoJson(geojsonData, {
         style: (feature) => {
+            let col = "red";
+            if(feature.properties.LINE_NAME == 'Blue Line') {
+                col = "blue";
+            }
             return {
-                color: "red"
+                color: col
             }
         },
         onEachFeature: (feature, layer) => {

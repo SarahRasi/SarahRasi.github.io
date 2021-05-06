@@ -160,12 +160,7 @@ for (let config of OGDWIEN) {
 var hash = new L.Hash(map);
 
 
-
-
 //Minimap
-
-
-
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
         toggleDisplay: true,
@@ -173,6 +168,29 @@ var miniMap = new L.Control.MiniMap(
     }
 ).addTo(map);
 
+
+
+//Reachability plugin
+L.control.reachability({
+    // add settings/options here
+    apiKey: '5b3ce3597851110001cf6248013ff0356cd14193bcc65325825d8fb5', 
+    drawButtonContent: '',
+        drawButtonStyleClass: 'fa fa-pencil-alt',
+    deleteButtonContent: '',
+    deleteButtonStyleClass: 'fa fa-trash',
+    distanceButtonContent: '',
+    distanceButtonStyleClass: 'fa fa-road',
+    timeButtonContent: '',
+        timeButtonStyleClass: 'fa fa-clock',
+    travelModeButton1Content: '',
+    travelModeButton1StyleClass: 'fa fa-car',
+    travelModeButton2Content: '',
+    travelModeButton2StyleClass: 'fa fa-bicycle',
+    travelModeButton3Content: '',
+    travelModeButton3StyleClass: 'fa fa-male',
+    travelModeButton4Content: '',
+        travelModeButton4StyleClass: 'fa fa-wheelchair'
+}).addTo(map);
 
 //aus data gv weiteren Dazuesatz dazu mit Sehenswürdigkeiten in Wien (bei data.gv.at in Suche Sehenswürdigkeiten Standorte Wien)
 //runterladen, Programm so erweitern, dass wir das dazu schalten können mit Icon und hinzu und weg schalten (Punkt Layer)

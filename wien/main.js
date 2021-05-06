@@ -154,5 +154,9 @@ for (let config of OGDWIEN) {
 }
 
 
+// Leaflet hash
+var hash = new L.Hash(map);
+
+
 //aus data gv weiteren Dazuesatz dazu mit Sehenswürdigkeiten in Wien (bei data.gv.at in Suche Sehenswürdigkeiten Standorte Wien)
 //runterladen, Programm so erweitern, dass wir das dazu schalten können mit Icon und hinzu und weg schalten (Punkt Layer)

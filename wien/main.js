@@ -13,6 +13,7 @@ let baselayers = {
     ]),
 };
 
+
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
     busLines: L.featureGroup(),
@@ -157,6 +158,20 @@ for (let config of OGDWIEN) {
 
 // Leaflet hash
 var hash = new L.Hash(map);
+
+
+
+
+//Minimap
+
+
+
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"), {
+        toggleDisplay: true,
+        minimized: true
+    }
+).addTo(map);
 
 
 //aus data gv weiteren Dazuesatz dazu mit Sehenswürdigkeiten in Wien (bei data.gv.at in Suche Sehenswürdigkeiten Standorte Wien)

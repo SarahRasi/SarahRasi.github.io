@@ -169,7 +169,7 @@ var hash = new L.Hash(map);
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
         toggleDisplay: true,
-        minimized: true
+        minimized: false
     }
 ).addTo(map);
 

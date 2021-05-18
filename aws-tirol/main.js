@@ -4,12 +4,14 @@ let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 
 let map = L.map("map", {
     //https://leafletjs.com/reference-1.7.1.html#map-factory
+    fullscreenControl: true,
     center: [47, 11],
     zoom: 9,
     layers: [
         basemapGray
     ]
 });
+
 
 let overlays = {
     stations: L.featureGroup(),
@@ -51,15 +53,7 @@ L.control.scale({
 }).addTo(map);
 
 
-// Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
-let map = L.map("map", {
-    fullscreenControl: true,
-    center: [48.208333, 16.373056],
-    zoom: 13,
-    layers: [
-        baselayers.grau
-    ]
-});
+
 
 
 L.control.rainviewer({
@@ -197,13 +191,14 @@ fetch(awsUrl)
         map.fitBounds(overlays.stations.getBounds());
     });
 
-//Minimap
+// Minimap
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
+        minZoom: 0, 
+        maxZoom: 13,
         toggleDisplay: true,
         minimized: false
     }
 ).addTo(map);
-
 
     //newLabel(...,...).addTo(overlays.temperature)

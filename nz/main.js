@@ -1,4 +1,3 @@
-
 let stop = {
     nr: 21,
     name: "Napier",
@@ -15,10 +14,11 @@ console.log(stop.wikipedia)
 
 const map = L.map("map", {
     //center: [stop.lat , stop.lng],
-   // zoom: 13,
+    // zoom: 13,
+    fullscreenControl: true,
     layers: [
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")  //s server, x longitude, y latitude
-    ] 
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") //s server, x longitude, y latitude
+    ]
 });
 
 
@@ -27,7 +27,7 @@ console.log('Navigation HTML Element: ', nav);
 //console.log(nav);
 //console.log(ROUTE);
 //ROUTE.sort((stop1, stop2) => {
- //   return stop1.nr > stop2.nr
+//   return stop1.nr > stop2.nr
 //});
 
 ROUTE.sort((stop1, stop2) => {
@@ -39,8 +39,8 @@ ROUTE.sort((stop1, stop2) => {
 });
 
 
-for(let entry of ROUTE) {
-   // console.log(entry); 
+for (let entry of ROUTE) {
+    // console.log(entry); 
 
     nav.innerHTML += `<option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>`;
     let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
@@ -59,12 +59,21 @@ nav.onchange = (evt) => {
     console.log(evt.target.selectedIndex);
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
-    let username =options[selected].value;
+    let username = options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
-    window.location.href = link; 
-    console.log(username, link); 
+    window.location.href = link;
+    console.log(username, link);
 };
 
 //<option value="SarahRasi">Napier</option>
 console.log(document.querySelector("#map")); //# für css ID; Karte initialisiert und DIV in der Konsole angezeigt
 
+// Minimap
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("OpenTopoMap"), {
+        minZoom: 0, 
+        maxZoom: 13,
+        toggleDisplay: true,
+        minimized: false
+    }
+).addTo(map);

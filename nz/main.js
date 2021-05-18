@@ -72,7 +72,7 @@ console.log(document.querySelector("#map")); //# für css ID; Karte initialisier
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("OpenTopoMap"), {
         minZoom: 0, 
-        maxZoom: 13,
+        maxZoom: 11,
         toggleDisplay: true,
         minimized: false
     }

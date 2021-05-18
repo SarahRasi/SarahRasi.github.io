@@ -50,6 +50,18 @@ L.control.scale({
     imperial: false
 }).addTo(map);
 
+
+// Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
+let map = L.map("map", {
+    fullscreenControl: true,
+    center: [48.208333, 16.373056],
+    zoom: 13,
+    layers: [
+        baselayers.grau
+    ]
+});
+
+
 L.control.rainviewer({
     position: 'bottomleft',
     nextButtonText: '>',
@@ -184,5 +196,14 @@ fetch(awsUrl)
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
     });
+
+//Minimap
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"), {
+        toggleDisplay: true,
+        minimized: false
+    }
+).addTo(map);
+
 
     //newLabel(...,...).addTo(overlays.temperature)

@@ -84,7 +84,7 @@ const drawTrack = (nr) => {
     elevationControl.load(`tracks/${nr}.gpx`);
 };
 
-const selectedTrack = 7;
+const selectedTrack =22;
 drawTrack(selectedTrack);
 
 console.log('biketirol json: ', BIKETIROL);

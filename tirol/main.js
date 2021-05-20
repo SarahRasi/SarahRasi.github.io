@@ -82,7 +82,7 @@ const drawTrack = (nr) => {
     elevationControl.load(`tracks/${nr}.gpx`);
 };
 
-const selectedTrack = 7;
+const selectedTrack = 22;
 drawTrack(selectedTrack);
 
 console.log('biketirol json: ', BIKETIROL);
@@ -97,3 +97,8 @@ for (let track of BIKETIROL) {
     }
     pulldown.innerHTML += `<option value="${track.nr}"${track.etappe}</option>`;
 }
+
+pulldown.onchange = () => {
+    console.log('changed!!', pulldown.value);
+    drawTrack(pulldown.value);
+};

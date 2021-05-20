@@ -82,23 +82,23 @@ const drawTrack = (nr) => {
     elevationControl.load(`tracks/${nr}.gpx`);
 };
 
-const selectedTrack = 22;
+const selectedTrack = 7;
 drawTrack(selectedTrack);
 
 console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
 console.log('Pulldown: ', pulldown);
-let selected = ' ';
+let selected = '';
 for (let track of BIKETIROL) {
     if (selectedTrack == track.nr) {
         selected = 'selected';
     } else {
         selected = '';
     }
-    pulldown.innerHTML += `<option value="${track.nr}"${track.etappe}</option>`;
+    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
 
 pulldown.onchange = () => {
-    console.log('changed!!', pulldown.value);
+    console.log('changed!!!!!', pulldown.value);
     drawTrack(pulldown.value);
 };

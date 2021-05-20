@@ -51,8 +51,17 @@ const drawTrack = (nr) => {
             startIconUrl: `icons/number_${nr}.png`,
             endIconUrl: 'icons/finish.png',
             shadowUrl: null,
-          }
+          },
+          polyline_options: {
+              color: 'black',
+              dashArray: [2, 5],
+          },
     }).addTo(overlays.tracks);
+    gpxTrack.on("loaded", () => {
+        console.log('loaded.gpx');
+        map.fitBounds(gpxTrack.getBounds());
+        console.log('Track name: ', gpxTrack.get_name());
+    });
 };
 
 const selectedTrack = 22;

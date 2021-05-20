@@ -21,7 +21,6 @@ let overlays = {
 
 // Karte initialisieren und auf Innsbrucks Wikipedia Koordinate blicken
 let map = L.map("map", {
-    fullscreenControl: true,
     center: [47.267222, 11.392778],
     zoom: 9,
     layers: [
@@ -43,19 +42,25 @@ let layerControl = L.control.layers({
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 
+const elevationControl = L.control.elevation({
+    elevationDiv: "#profile",
+    followMarker: false,
+    theme: 'lime-theme',
+}).addTo(map);
+
 const drawTrack = (nr) => {
-    console.log('Track: ', nr);
+    // console.log('Track: ', nr);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true,
         marker_options: {
             startIconUrl: `icons/number_${nr}.png`,
             endIconUrl: 'icons/finish.png',
             shadowUrl: null,
-          },
-          polyline_options: {
-              color: 'black',
-              dashArray: [2, 5],
-          },
+        },
+        polyline_options: {
+            color: 'black',
+            dashArray: [2, 5],
+        },
     }).addTo(overlays.tracks);
     gpxTrack.on("loaded", () => {
         console.log('loaded gpx');
@@ -74,8 +79,21 @@ const drawTrack = (nr) => {
         // TODO: popup with
         // Name, max_height, min_height, total_dist
     });
+    elevationControl.load(`tracks/${nr}.gpx`);
 };
 
-const selectedTrack = 22;
+const selectedTrack = 7;
 drawTrack(selectedTrack);
 
+console.log('biketirol json: ', BIKETIROL);
+let pulldown = document.querySelector("#pulldown");
+console.log('Pulldown: ', pulldown);
+let selected = ' ';
+for (let track of BIKETIROL) {
+    if (selectedTrack == track.nr) {
+        selected = 'selected';
+    } else {
+        selected = '';
+    }
+    pulldown.innerHTML += `<option value="${track.nr}"${track.etappe}</option>`;
+}

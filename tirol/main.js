@@ -42,3 +42,10 @@ let layerControl = L.control.layers({
 
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
+
+const drawTrack = (nr) => {
+console.log('Track: ', nr);
+};
+
+const selectedTrack = 22;
+drawTrack(selechtedTrack);

@@ -188,7 +188,7 @@ drawTrack(selectedTrack);
 
 
 const updateTexts = (nr) => {
-    console.log(nr);
+    //console.log(nr);
     for(let etappe of BIKETIROL) {
         //console.log(etappe);
         //ist es die aktuelle etappe?
@@ -196,10 +196,10 @@ const updateTexts = (nr) => {
             //console.log("unsere Etappe", etappe);
             etappe.homepage = `<a href="${etappe.weblink}">Homepage</a>`;
             for (let key in etappe) {
-            console.log("key:", key, "value:", etappe[key]);
+            //console.log("key:", key, "value:", etappe[key]);
                 //gibt es ein Element in HTML mit der ID von "key"
                 if (document.querySelector(`#text-${key}`)) {
-                    console.log("Juhu", key, etappe[key]);
+                    //console.log("Juhu", key, etappe[key]);
                     document.querySelector(`#text-${key}`).innerHTML = etappe[key];
                 }    
             }

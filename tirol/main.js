@@ -83,10 +83,22 @@ const drawWikipedia = (bounds) => {
         
         //Artikel Marker erzeugen
         for(let article of jsonData.geonames) {
-            let mrk = L.marker([article.lat, article.lng]);
+            //welches Icon soll verwenet werden
+            if (icons[article.feature]) {
+                //ein bekanntes
+            } else {
+                //unser generisches Info Icon
+                article.feature = "default";
+            }
+
+            let mrk = L.marker([article.lat, article.lng], {
+                icon: L.icon({
+                    iconUrl: `icons/${icons[article.feature]}`
+                })
+            });
             mrk.addTo(overlays.wikipedia);
 
-            // optionales Bild 
+            // optionales Bild definieren
             let img = "";
             if (article.thumbnailImg) {
                 img = `<img src="${article.thumbnailImg}"

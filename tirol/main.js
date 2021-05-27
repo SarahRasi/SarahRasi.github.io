@@ -45,24 +45,40 @@ let layerControl = L.control.layers({
 overlays.tracks.addTo(map);
 overlays.wikipedia.addTo(map);
 
-
+// Elevation control initialisieren
 const elevationControl = L.control.elevation({
     elevationDiv: "#profile",
     followMarker: false,
     theme: 'lime-theme',
 }).addTo(map);
 
-
-//Wiki Artikel zeichnen
+// Wikipedia Artikel Zeichnen
 const drawWikipedia = (bounds) => {
     console.log(bounds);
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=SarahRasi&lang=de&maxRows=30`;
+    console.log(url);
+    fetch(url).then(
+        response => response.json()
+    ).then(jsonData => {
+        console.log(jsonData)
+    });
 };
 
+let activeElevationTrack;
 
+// Funktion zum Zeichnen eines Tracks inkl. Hoehenprofil
 const drawTrack = (nr) => {
     // console.log('Track: ', nr);
+    // clear elevation data:
     elevationControl.clear();
+    // clear GPX plugin layers
     overlays.tracks.clearLayers();
+    // bugfix for leaflet-elevation plugin not cleaning up
+    if (activeElevationTrack) {
+        activeElevationTrack.removeFrom(map);
+    }
+    // for new browsers:
+    // activeElevationTrack?.removeFrom(map);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true,
         marker_options: {
@@ -75,10 +91,11 @@ const drawTrack = (nr) => {
             dashArray: [2, 5],
         },
     }).addTo(overlays.tracks);
+    // Eventhandler wenn alle Daten des GPX plugin geladen sind
     gpxTrack.on("loaded", () => {
-        console.log('loaded gpx');
+        // console.log('loaded gpx');
         map.fitBounds(gpxTrack.getBounds());
-        console.log('Track name: ', gpxTrack.get_distance());
+        // console.log('Track name: ', gpxTrack.get_distance());
         gpxTrack.bindPopup(`
         <h3>${gpxTrack.get_name()}</h3>
         <ul>
@@ -89,21 +106,24 @@ const drawTrack = (nr) => {
             <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
         </ul>
         `);
-        // TODO: popup with
-        // Name, max_height, min_height, total_dist
 
-        //Wiki Artikel zeichnen
+        // Wikipedia Artikel zeichnen
         drawWikipedia(gpxTrack.getBounds());
     });
     elevationControl.load(`tracks/${nr}.gpx`);
+    elevationControl.on('eledata_loaded', (evt) => {
+        activeElevationTrack = evt.layer;
+    });
+
 };
 
-const selectedTrack =22;
+const selectedTrack = 7;
 drawTrack(selectedTrack);
 
-console.log('biketirol json: ', BIKETIROL);
+// console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
-console.log('Pulldown: ', pulldown);
+
+// Schleife zum Aufbau des Dropdown Menu
 let selected = '';
 for (let track of BIKETIROL) {
     if (selectedTrack == track.nr) {
@@ -114,7 +134,8 @@ for (let track of BIKETIROL) {
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
 
+// Eventhandler fuer Aenderung des Dropdown
 pulldown.onchange = () => {
-    console.log('changed!!!!!', pulldown.value);
+    // console.log('changed!!!!!', pulldown.value);
     drawTrack(pulldown.value);
 };

@@ -53,6 +53,11 @@ const elevationControl = L.control.elevation({
 }).addTo(map);
 
 
+//Wiki Artikel zeichnen
+const drawWikipedia = (bounds) => {
+    console.log(bounds);
+};
+
 
 const drawTrack = (nr) => {
     // console.log('Track: ', nr);
@@ -86,6 +91,9 @@ const drawTrack = (nr) => {
         `);
         // TODO: popup with
         // Name, max_height, min_height, total_dist
+
+        //Wiki Artikel zeichnen
+        drawWikipedia(gpxTrack.getBounds());
     });
     elevationControl.load(`tracks/${nr}.gpx`);
 };

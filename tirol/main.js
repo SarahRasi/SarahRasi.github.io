@@ -55,12 +55,18 @@ const elevationControl = L.control.elevation({
 // Wikipedia Artikel Zeichnen
 const drawWikipedia = (bounds) => {
     console.log(bounds);
-    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=SarahRasi&lang=de&maxRows=30`;
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=webmapping&lang=de&maxRows=30`;
     console.log(url);
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData)
+        console.log(jsonData);
+        
+        //Artikel Marker erzeugen
+        for(let article of jsonData.geonames) {
+            let mrk = L.marker([aricle.lat, article.lng]);
+            mrk.addTo(overlays.wikipedia);
+        }
     });
 };
 

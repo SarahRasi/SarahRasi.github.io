@@ -183,8 +183,13 @@ const drawTrack = (nr) => {
 
 };
 
-const selectedTrack = 7;
+const selectedTrack = 22;
 drawTrack(selectedTrack);
+
+
+const updateTexts = (nr) => {
+    console.log(nr);
+};
 
 // console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
@@ -199,11 +204,19 @@ for (let track of BIKETIROL) {
     }
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
+//Metadaten der Etappe updaten
+updateTexts(pulldown.value);
+
+
+
 
 // Eventhandler fuer Aenderung des Dropdown
 pulldown.onchange = () => {
     // console.log('changed!!!!!', pulldown.value);
     drawTrack(pulldown.value);
+
+    //Metadaten der Etappen updaten
+    updateTexts(pulldown.value);
 };
 
 
